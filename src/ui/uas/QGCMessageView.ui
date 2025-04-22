@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -37,22 +37,29 @@
         <x>0</x>
         <y>0</y>
         <width>303</width>
-        <height>273</height>
+        <height>231</height>
        </rect>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="margin">
-        <number>0</number>
-       </property>
        <item>
         <widget class="QPlainTextEdit" name="plainTextEdit">
          <property name="readOnly">
           <bool>true</bool>
          </property>
+         <property name="overwriteMode">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="clearButton">
+     <property name="text">
+      <string>Clear Text</string>
+     </property>
     </widget>
    </item>
   </layout>

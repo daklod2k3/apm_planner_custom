@@ -1147,18 +1147,19 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
                 text.remove("#audio:");
                 emit textMessageReceived(uasId, message.compid, severity, QString("Audio message: ") + text);
                 GAudioOutput::instance()->say(text, severity);
+                break;
             }
-            else
-            {
-                if (text.startsWith("Fire detected")){
-                    emit textMessageReceived(uasId, message.compid, severity, "Fire detect msg: " + text);
-                    GAudioOutput::instance()->say("Fire detected", severity);
-                    
-                }else 
-                    emit textMessageReceived(uasId, message.compid, severity, text);
+            
+            if (text.startsWith("#detect")){
+                emit textMessageReceived(uasId, message.compid, severity, "Fire detect msg: " + text);
+                GAudioOutput::instance()->say("Fire detected", severity);
+                break;
+            }
+
+            emit textMessageReceived(uasId, message.compid, severity, text);
 
 
-            }
+            
         }
             break;
         case MAVLINK_MSG_ID_SERVO_OUTPUT_RAW:

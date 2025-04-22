@@ -16,6 +16,9 @@ QGCMessageView::QGCMessageView(QWidget *parent) :
     ui->setupUi(this);
     setStyleSheet("QScrollArea { border: 0px; } QPlainTextEdit { border: 0px }");
 
+    // Connect the clear button clicked signal to the plainTextEdit clear slot
+    connect(ui->clearButton, SIGNAL(clicked()), ui->plainTextEdit, SLOT(clear()));
+
     connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), this, SLOT(setActiveUAS(UASInterface*)));
 }
 
