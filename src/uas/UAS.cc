@@ -386,7 +386,7 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
         emit componentCreated(uasId, message.compid, componentName);
     }
 
-    //    QLOG_DEBUG() << "UAS RECEIVED from" << message.sysid << "component" << message.compid << "msg id" << message.msgid << "seq no" << message.seq;
+       QLOG_DEBUG() << "UAS RECEIVED from" << message.sysid << "component" << message.compid << "msg id" << message.msgid << "seq no" << message.seq;
 
     // Only accept messages from this system (condition 1)
     // and only then if a) attitudeStamped is disabled OR b) attitudeStamped is enabled
@@ -1131,7 +1131,7 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
             mavlink_msg_mission_current_decode(&message, &wpc);
             waypointManager.handleWaypointCurrent(message.sysid, message.compid, &wpc);
         }
-            break;
+            break;    
         case MAVLINK_MSG_ID_STATUSTEXT:
         {
             QByteArray b;
@@ -1150,7 +1150,14 @@ void UAS::receiveMessage(LinkInterface* link, mavlink_message_t message)
             }
             else
             {
-                emit textMessageReceived(uasId, message.compid, severity, text);
+                if (text.startsWith("Fire detected")){
+                    emit textMessageReceived(uasId, message.compid, severity, "Fire detect msg: " + text);
+                    GAudioOutput::instance()->say("Fire detected", severity);
+                    
+                }else 
+                    emit textMessageReceived(uasId, message.compid, severity, text);
+
+
             }
         }
             break;
