@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<mavlink>
+  <version>1</version>
+  <messages>
+    <message id="1000" name="FIRE_DETECT">
+      <description>Test all field types</description>
+      <field type="char" name="c">char</field>
+      <field type="char[10]" name="s">string</field>
+    </message>
+  </messages>
+</mavlink>
